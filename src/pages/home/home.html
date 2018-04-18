@@ -1,14 +1,40 @@
-<ion-header>
+
+ <ion-header>
   <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
+    <ion-title>Home</ion-title>
   </ion-navbar>
-</ion-header>
+  </ion-header>
+
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <ion-card *ngFor="let item of tableau; ">
+  <img src="{{item.photo}}" alt="photo De Profil"/>
+  <ion-card-content>
+    <ion-card-title>
+      {{ item.prenom }} {{ item.nom }} <br>
+      {{ item.age }} ans
+      </ion-card-title>
+    <p>
+      {{ item.descripiton }}
+    </p>
+    <ion-col >
+      <button ion-button icon-left color="danger" small (tap)="dislike(item.id)"  >
+        <ion-icon name="remove-circle"></ion-icon>
+        <div> DisLike</div>
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button icon-left  small (tap)="like(item.id)">
+        <ion-icon name="heart"></ion-icon>
+        <div>Like </div>
+      </button>
+    </ion-col>
+  </ion-card-content>
+</ion-card>
 </ion-content>
+
+<!-- <ion-footer>
+  <ion-toolbar>
+    <ion-title><p>je sais pas</p></ion-title>
+  </ion-toolbar>
+</ion-footer> -->
