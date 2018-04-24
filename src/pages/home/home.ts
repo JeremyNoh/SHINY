@@ -3,6 +3,7 @@ import { NavController , NavParams} from 'ionic-angular';
 import { HttpClient ,HttpHeaders} from '@angular/common/http';
 import { Http } from '@angular/http';
 import { AlertController,LoadingController } from 'ionic-angular';
+import { ProfilPage } from '../profil/profil';
 
 
 
@@ -11,6 +12,8 @@ import { AlertController,LoadingController } from 'ionic-angular';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
+
+
 })
 
 export class HomePage {
@@ -19,7 +22,6 @@ export class HomePage {
   searchQuery: string = '';
   public results: any = [];
   public tableau: any = [];
-  params: string = '';
   public tableauValide: any = [];
   key : string = 'keyAER9NsfEje3klJ' ;
   monProfil  : any ;
@@ -33,7 +35,7 @@ export class HomePage {
 
 
   ionViewWillEnter() {
-
+    console.log("this.param : " + this.param  )
     this.http.get('https://api.airtable.com/v0/apprPs0xUlhW1ITEv/human?api_key='+this.key).subscribe(data => {
         // result = [] : recoit tout le JSON de la table Human
         this.results = [];
@@ -50,16 +52,21 @@ export class HomePage {
         }
         this.monProfil = this.results[LigneElement]
 
-        // fintest
-        // transforme like en  tableau;
+
+        // transforme like en tableau;
         if(this.monProfil.fields.like == undefined){
           this.monProfil.fields.like = this.monProfil.id;
         }
 
-        // fintest
-        // transforme dislike en  tableau;
+
+        // transforme dislike en tableau;
         if(this.monProfil.fields.dislike == undefined){
           this.monProfil.fields.dislike = this.monProfil.id;
+        }
+
+        // transforme match en tableau;
+        if(this.monProfil.fields.match == undefined){
+          this.monProfil.fields.match = this.monProfil.id;
         }
 
 
@@ -92,7 +99,8 @@ export class HomePage {
                "prenom" : this.results[i].fields.prenom,
                "age": this.results[i].fields.age,
                "descripiton": this.results[i].fields.descripiton,
-               "photo": this.results[i].fields.photo[0].url
+               "photo": this.results[i].fields.photo[0].url,
+               "like": this.results[i].fields.like
              });
 
           }
@@ -101,46 +109,146 @@ export class HomePage {
     })
    }
 
-   like(idPeople){
-    //  test
-    let url = ` https://api.airtable.com/v0/apprPs0xUlhW1ITEv/human/${this.monProfil.id}?api_key=${this.key} ` ;
-    this.funLoading();
-    this.http.patch(url,
-      {"fields":{"like":`${this.monProfil.fields.like};${idPeople}`}})
-      .subscribe(
-        val => {
-          console.log("PUT call successful value returned in body",
-          val);
-        },
-        response => {
-          console.log("PUT call in error", response);
-        },
-        () => {
+   like(idPeople, like){
+     console.log('test : '+this.monProfil.fields.match)
+     if(like){
 
-          let alert = this.alertCtrl.create({
-            title: 'Like',
-            subTitle: 'Continue de liker!!',
-            buttons: ['Fermer']
-          });
-          alert.present();
+       // transforme like en tableau;
+       var liker = like.split(";")
+       var match = "";
 
-          // ajoute a lattribut monProfil lid de la personne liker
-          this.monProfil.fields.like = this.monProfil.fields.like +`;${idPeople}` ;
+       for(var b = 0; b < liker.length; b++){
 
-          // supprime dans le tableau element liker
-            var LigneElement
-            for(var i = 0; i < this.tableau.length; i++){
-              if( this.tableau[i].id.indexOf(idPeople) == "0"){
-                LigneElement = [i]
+         if(liker[b] == this.id){
+           match = "bingo";
+         }
+       }
+
+       if(match == "bingo"){
+          console.log("BINNNGOOOO c'est un match ")
+          //  fonction de like
+          let url = ` https://api.airtable.com/v0/apprPs0xUlhW1ITEv/human/${this.monProfil.id}?api_key=${this.key} ` ;
+          this.funLoading();
+          this.http.patch(url,
+            {"fields":{"like":`${this.monProfil.fields.like};${idPeople}`,"match":`${this.monProfil.fields.match};${idPeople}`}})
+            .subscribe(
+              val => {
+                console.log("PUT call successful value returned in body",
+                val);
+              },
+              response => {
+                console.log("PUT call in error", response);
+              },
+              () => {
+
+                let alert = this.alertCtrl.create({
+                  title: "C'est un Match <3",
+                  subTitle: 'Olala cest le moment de concrétiser',
+                  buttons: ['Fermer']
+                });
+                alert.present();
+
+                // ajoute a monProfil lid de la personne liker
+                this.monProfil.fields.like = this.monProfil.fields.like +`;${idPeople}` ;
+                // ajoute a monProfil lid de la personne Matcher
+                this.monProfil.fields.match = this.monProfil.fields.match +`;${idPeople}` ;
+
+
+                // supprime dans le tableau element liker
+                  var LigneElement
+                  for(var i = 0; i < this.tableau.length; i++){
+                    if( this.tableau[i].id.indexOf(idPeople) == "0"){
+                      LigneElement = [i]
+                    }
+                  }
+                  this.tableau.splice(LigneElement,1)
               }
+            );
+       }
+      else{
+        //  fonction de like
+        let url = ` https://api.airtable.com/v0/apprPs0xUlhW1ITEv/human/${this.monProfil.id}?api_key=${this.key} ` ;
+        this.funLoading();
+        this.http.patch(url,
+          {"fields":{"like":`${this.monProfil.fields.like};${idPeople}`}})
+          .subscribe(
+            val => {
+              console.log("PUT call successful value returned in body",
+              val);
+            },
+            response => {
+              console.log("PUT call in error", response);
+            },
+            () => {
+
+              let alert = this.alertCtrl.create({
+                title: 'Like',
+                subTitle: 'Continue de liker!!',
+                buttons: ['Fermer']
+              });
+              alert.present();
+
+              // ajoute a lattribut monProfil lid de la personne liker
+              this.monProfil.fields.like = this.monProfil.fields.like +`;${idPeople}` ;
+
+              // supprime dans le tableau element liker
+                var LigneElement
+                for(var i = 0; i < this.tableau.length; i++){
+                  if( this.tableau[i].id.indexOf(idPeople) == "0"){
+                    LigneElement = [i]
+                  }
+                }
+                this.tableau.splice(LigneElement,1)
+
+
             }
-            this.tableau.splice(LigneElement,1)
+          );
+          // fin else
+      }
+
+     }
+     else{
+      // sinon ajout du like
+      let url = ` https://api.airtable.com/v0/apprPs0xUlhW1ITEv/human/${this.monProfil.id}?api_key=${this.key} ` ;
+      this.funLoading();
+      this.http.patch(url,
+        {"fields":{"like":`${this.monProfil.fields.like};${idPeople}`}})
+        .subscribe(
+          val => {
+            console.log("PUT call successful value returned in body",
+            val);
+          },
+          response => {
+            console.log("PUT call in error", response);
+          },
+          () => {
+
+            let alert = this.alertCtrl.create({
+              title: 'Like',
+              subTitle: 'Continue de liker!!',
+              buttons: ['Fermer']
+            });
+            alert.present();
+
+            // ajoute a lattribut monProfil lid de la personne liker
+            this.monProfil.fields.like = this.monProfil.fields.like +`;${idPeople}` ;
+
+            // supprime dans le tableau element liker
+              var LigneElement
+              for(var i = 0; i < this.tableau.length; i++){
+                if( this.tableau[i].id.indexOf(idPeople) == "0"){
+                  LigneElement = [i]
+                }
+              }
+              this.tableau.splice(LigneElement,1)
 
 
-        }
-      );
+          }
+        );
+// fin else
+     }
 
-    // finTest
+
    }
 
    dislike(idPeople){
@@ -195,6 +303,13 @@ export class HomePage {
      setTimeout(() => {
        loading.dismiss();
      }, 1000);
+   }
+
+   editProfil(){
+    console.log("je sais pas")
+    this.navCtrl.push(ProfilPage,this.monProfil);
+
+
    }
 
 

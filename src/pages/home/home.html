@@ -1,13 +1,29 @@
-
- <ion-header>
+<!-- <ion-header>
   <ion-navbar>
     <ion-title>Home</ion-title>
   </ion-navbar>
-  </ion-header>
+</ion-header> -->
 
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons start>
+      <button ion-button icon-only color="royal" (tap)="editProfil()">
+      <ion-icon name="contact"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Home</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only color="royal">
+        <ion-icon name="heart"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content padding>
+
   <ion-card *ngFor="let item of tableau; ">
+
   <img src="{{item.photo}}" alt="photo De Profil"/>
   <ion-card-content>
     <ion-card-title>
@@ -24,7 +40,7 @@
       </button>
     </ion-col>
     <ion-col>
-      <button ion-button icon-left  small (tap)="like(item.id)">
+      <button ion-button icon-left  small (tap)="like(item.id, item.like)">
         <ion-icon name="heart"></ion-icon>
         <div>Like </div>
       </button>
@@ -32,6 +48,29 @@
   </ion-card-content>
 </ion-card>
 </ion-content>
+
+<!-- <ion-footer>
+  <ion-toolbar>
+      <ion-buttons start>
+        <button ion-button icon-only>
+          <ion-icon name="create"></ion-icon>
+        </button>
+      </ion-buttons>
+      <ion-segment>
+        <ion-segment-button value="new" activated>
+          New
+        </ion-segment-button>
+        <ion-segment-button value="hot">
+          Hot
+        </ion-segment-button>
+      </ion-segment>
+      <ion-buttons end>
+        <button ion-button icon-only>
+          <ion-icon name="more"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
+</ion-footer> -->
 
 <!-- <ion-footer>
   <ion-toolbar>
