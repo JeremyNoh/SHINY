@@ -30,10 +30,10 @@ www/
 $RECYCLE.BIN/
 resources/
 config.xml
-# platforms/browser/browser.json
-# platforms/browser/config.xml
-# platforms/browser/cordova/
-# platforms/browser/platform_www/
+platforms/browser/browser.json
+platforms/browser/config.xml
+platforms/browser/cordova/
+platforms/browser/platform_www/
 
 
 

@@ -1,0 +1,12 @@
+email (unique ) OK
+nom OK
+prenom OK
+mdp OK
+photo ( 3max )
+username (unique ) OK
+age ( int ) OK
+sexe (bouton radio : homme , femme) OK
+recherche (bouton radio : homme , femme) OK
+descripiton  OK
+Situation actuelle (liste deroulante : ecole , entreprise , autre + descripiton ) OK
+centre d'interet  (modal :  sport , musqiue , dance , cinema , politique ,animaux cuisine , technologie , voyage , l'art, cultutre  , nature,  soirée  ) ok

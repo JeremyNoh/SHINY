@@ -35,7 +35,7 @@ export class HomePage {
 
 
   ionViewWillEnter() {
-    console.log("this.param : " + this.param  )
+    // console.log("this.param : " + this.param  )
     this.http.get('https://api.airtable.com/v0/apprPs0xUlhW1ITEv/human?api_key='+this.key).subscribe(data => {
         // result = [] : recoit tout le JSON de la table Human
         this.results = [];

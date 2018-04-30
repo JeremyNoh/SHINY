@@ -10,6 +10,8 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { ProfilPage } from '../pages/profil/profil';
+import { SignUpPage } from '../pages/signUp/signUp';
+
 
 
 @NgModule({
@@ -17,7 +19,8 @@ import { ProfilPage } from '../pages/profil/profil';
     MyApp,
     HomePage,
     LoginPage,
-    ProfilPage
+    ProfilPage,
+    SignUpPage
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,8 @@ import { ProfilPage } from '../pages/profil/profil';
     MyApp,
     HomePage,
     LoginPage,
-    ProfilPage
+    ProfilPage,
+    SignUpPage
   ],
   providers: [
     StatusBar,

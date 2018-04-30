@@ -5,6 +5,8 @@ import { HttpClient ,HttpHeaders} from '@angular/common/http';
 import { Http } from '@angular/http';
 import { AlertController,LoadingController ,ViewController } from 'ionic-angular';
 import { HomePage } from '../home/home';
+import { SignUpPage } from '../signUp/signUp';
+
 
 
 
@@ -75,9 +77,12 @@ export class LoginPage {
         buttons: ['Fermer']
       });
       alert.present();
-
     }
-
   }
+
+  signUp(){
+    this.navCtrl.setRoot(SignUpPage);
+  }
+
 
 }

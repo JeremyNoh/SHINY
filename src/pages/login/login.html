@@ -17,22 +17,48 @@
     </ion-card-header>
     <ion-card-content>
       <ion-list>
+        <ion-item>
+          <ion-label>Email</ion-label>
+          <ion-input type="text" [(ngModel)]="email" name="email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Password</ion-label>
+          <ion-input type="password" [(ngModel)]="password" ></ion-input>
+        </ion-item>
+        <button ion-button  (tap)="log()" block>LOGIN</button>
+</ion-list>
+    </ion-card-content>
+  </ion-card>
+  <p>tu n'es pas déja inscrit ? <a (tap)= "signUp()" >Sign Up</a></p>
 
+</ion-content>
+
+
+
+<!--
+<ion-content padding>
+  <br>
+  <p>Bienvenue sur une Appli de rencontre </p>
+  <p>tu as le privilège de testé cette app toujours en beta </p>
+  <br/>
+  <br/>
+  <ion-card>
+    <ion-card-header>
+      Sign In
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
   <ion-item>
     <ion-label floating>Email</ion-label>
     <ion-input type="text" [(ngModel)]="email"></ion-input>
   </ion-item>
-
   <ion-item>
     <ion-label floating>Password</ion-label>
     <ion-input type="password" [(ngModel)]="password"></ion-input>
   </ion-item>
   <button ion-button color="secondary" (tap)="log()">LOGIN</button>
-
-
 </ion-list>
     </ion-card-content>
   </ion-card>
   <p>tu n'es pas déja inscrit ? <a>Sign Up</a></p>
-
-</ion-content>
+</ion-content> -->

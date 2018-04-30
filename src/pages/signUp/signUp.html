@@ -1,0 +1,138 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Création de Compte </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+<!-- *ngFor="let item of tableau; " -->
+<!-- ngIf="fields.Valide === 'False'" -->
+  <!-- Card Info  -->
+  <div *ngIf="index === 1">
+  <ion-card  >
+    <ion-card-header>
+      Information Principal
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label>Email</ion-label>
+          <ion-input type="text" [(ngModel)]="email" name="email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Prenom</ion-label>
+          <ion-input type="text" [(ngModel)]="prenom" name="prenom"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Nom</ion-label>
+          <ion-input type="text" [(ngModel)]="nom" name="nom"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Password</ion-label>
+          <ion-input type="password" [(ngModel)]="password" ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Confirm Password</ion-label>
+          <ion-input type="password" [(ngModel)]="ConfPassword" ></ion-input>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</div>
+
+  <!-- Card Info  -->
+  <!-- Card Secondaire  -->
+  <div  *ngIf="index === 2">
+  <ion-card>
+    <ion-card-header>
+      Information Secondaire
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label>Surnom</ion-label>
+          <ion-input type="text" [(ngModel)]="surnom" name="Surnom"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Age</ion-label>
+          <ion-input type="number" [(ngModel)]="age" name="age"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Sexe</ion-label>
+          <ion-select [(ngModel)]="sexe">
+            <ion-option value="Femme">Femme</ion-option>
+            <ion-option value="Homme">Homme</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>Recherche : </ion-label>
+          <ion-select [(ngModel)]="recherche">
+            <ion-option value="Femme">Femme</ion-option>
+            <ion-option value="Homme">Homme</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  </div>
+  <!-- Card Secondaire  -->
+  <!-- Card Description  -->
+  <div  *ngIf="index === 3">
+  <ion-card>
+    <ion-card-header>
+      Description
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-textarea placeholder="Enter a description" [(ngModel)]="description"></ion-textarea>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  </div>
+  <!-- Card Description  -->
+  <!-- Card Supplementaire  -->
+  <div  *ngIf="index === 4">
+  <ion-card>
+    <ion-card-header>
+      Information Supplementaire
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label>Situation actuelle </ion-label>
+          <ion-select [(ngModel)]="situation" cancelText="Retour" okText="Valider"   placeholder=" " >
+            <ion-option value="Etudiant">Etudiant</ion-option>
+            <ion-option value="Entreprise">Salarié</ion-option>
+            <ion-option value="chomeur">Profite de la vie </ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>centre d'interet </ion-label>
+          <ion-select [(ngModel)]="interet" multiple="true" cancelText="Retour" okText="Valider!"  placeholder=" ">
+            <ion-option value="sport">sport</ion-option>
+            <ion-option value="musique">musqiue</ion-option>
+            <ion-option value="dance">dance</ion-option>
+            <ion-option value="cinema">cinema</ion-option>
+            <ion-option value="politique">politique</ion-option>
+            <ion-option value="animaux">animaux</ion-option>
+            <ion-option value="cuisine">cuisine</ion-option>
+            <ion-option value="technologie">technologie</ion-option>
+            <ion-option value="voyage">voyage</ion-option>
+            <ion-option value="cultutre">cultutre</ion-option>
+            <ion-option value="nature">nature</ion-option>
+            <ion-option value="soirée">soirée</ion-option>
+            <ion-option value="art">l'art</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  </div>
+  <!-- Card Supplementaire  -->
+
+  <button ion-button  (tap)="nextStep()" block *ngIf="index < 4">Continuer</button>
+  <button ion-button  (tap)="create()" block *ngIf="index === 4" >LOGIN</button>
+
+</ion-content>
